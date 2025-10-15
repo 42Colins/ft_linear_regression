@@ -1,4 +1,8 @@
+import sys
+from trainer import isFileAccessible
+
 def getThetaValues() :
+	isFileAccessible("thetaValues.txt")
 	thetas = open("thetaValues.txt")
 	values = thetas.read().splitlines()
 	return values
@@ -8,10 +12,10 @@ def estimatePrice(mileage, theta0, theta1) :
 
 if __name__ == "__main__" :
 	try :
+		thetas = getThetaValues()
 		miles = float(input("What is the mileage of your car ?\n"))
 		if (miles < 0) :
 			raise Exception ("The mileage can't be a negative value !")
-		thetas = getThetaValues()
 		price = estimatePrice(float(miles), float(thetas[0]), float(thetas[1]))
 		print("The price should be", int(price))
 	except Exception as e :
